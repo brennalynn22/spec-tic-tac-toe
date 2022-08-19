@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import './App.css'
-import Square from './Square'
+import { useState } from "react";
+import "./App.css";
+import Square from "./Square";
 
 function App() {
   const [squares, setSquares] = useState(["", "", "", "", "", "", "", "", ""]);
@@ -11,7 +11,7 @@ function App() {
     setPlayer(true);
   };
 
-  function calculateWinner(arr) {
+  function calculateWinner(squares) {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -24,12 +24,15 @@ function App() {
     ];
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
-      if (arr[a] && arr[a] === arr[b] && arr[a] === arr[c]) {
-        return `${arr[a]} won!`;
-      } else {
-        return "Who will win?";
+      if (
+        squares[a] &&
+        squares[a] === squares[b] &&
+        squares[a] === squares[c]
+      ) {
+        return `${squares[a]} won!`;
       }
     }
+    return "Who will win?";
   }
 
   return (
@@ -49,10 +52,8 @@ function App() {
           );
         })}
       </div>
-      
-      <button className="App" onClick={handleClick}>
-        Reset
-      </button>
+
+      <button onClick={handleClick}>Reset</button>
     </div>
   );
 }
